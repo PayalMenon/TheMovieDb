@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">TheMovieDB</string>
+    <string name="fetch_failed">Failed To Fetch Movie List</string>
+</resources>

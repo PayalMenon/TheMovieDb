@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="imageMarginLeft">20dp</dimen>
+    <dimen name="marginLeft">10dp</dimen>
+    <dimen name="marginTop">10dp</dimen>
+    <dimen name="title_size">18sp</dimen>
+    <dimen name="text_size">13sp</dimen>
+    <dimen name="poster_image_width">185dp</dimen>
+    <dimen name="backdrop_image_width">780dp</dimen>
+
+</resources>
