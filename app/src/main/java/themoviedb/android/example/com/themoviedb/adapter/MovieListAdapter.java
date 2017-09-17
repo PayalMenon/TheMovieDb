@@ -31,12 +31,6 @@ public class MovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         this.listener = listener;
     }
 
-   /* @Override
-    public MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_item, parent, false);
-        return new MovieListAdapter.MovieViewHolder(view);
-    }*/
-
     @Override
     public int getItemViewType(int position) {
         MovieInfo info = movieList.get(position);
@@ -62,12 +56,8 @@ public class MovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         MovieInfo info = movieList.get(position);
 
         if (Constants.HIGH_RATED == viewHolder.getItemViewType()) {
+            
             TopRatedViewHolder holder = (TopRatedViewHolder) viewHolder;
-            if(info.isVideo()) {
-                holder.playVideoView.setVisibility(View.VISIBLE);
-            } else {
-                holder.playVideoView.setVisibility(View.GONE);
-            }
             Picasso.with(context).load(Constants.BACKDROP_IMAGE_URL + info.getMovieBackdrop())
                     .placeholder(R.drawable.placeholder)
                     .into(holder.bannerView);
@@ -101,41 +91,10 @@ public class MovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-    /*@Override
-    public void onBindViewHolder(MovieViewHolder holder, int position) {
-        MovieInfo info = movieList.get(position);
-        holder.titleView.setText(info.getMovieTitle());
-        holder.overviewView.setText(info.getMovieOverview());
-        if(context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            Picasso.with(context).load(Constants.IMAGE_URL + info.getMoviePoster())
-                    .placeholder(R.drawable.placeholder)
-                    .into(holder.posterView);
-        } else {
-            Picasso.with(context).load(Constants.BACKDROP_IMAGE_URL + info.getMovieBackdrop())
-                    .placeholder(R.drawable.placeholder)
-                    .into(holder.posterView);
-        }
-    }*/
-
     @Override
     public int getItemCount() {
         return movieList.size();
     }
-
-    /*public class MovieViewHolder extends RecyclerView.ViewHolder {
-
-        private TextView titleView;
-        private TextView overviewView;
-        private ImageView posterView;
-
-        public MovieViewHolder(View itemView) {
-            super(itemView);
-
-            titleView = itemView.findViewById(R.id.itemTitle);
-            overviewView = itemView.findViewById(R.id.itemOverview);
-            posterView = itemView.findViewById(R.id.itemImage);
-        }
-    }*/
 
     public class ListViewHolder extends RecyclerView.ViewHolder {
 
@@ -158,14 +117,12 @@ public class MovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         private ImageView bannerView;
         private CardView cardView;
-        private ImageView playVideoView;
 
         public TopRatedViewHolder(View itemView) {
             super(itemView);
 
             bannerView = itemView.findViewById(R.id.itemImage);
             cardView = itemView.findViewById(R.id.item_cardView);
-            playVideoView = itemView.findViewById(R.id.itemPlayVideo);
         }
     }
 
