@@ -56,7 +56,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         MovieInfo info = movieList.get(position);
 
         if (Constants.HIGH_RATED == viewHolder.getItemViewType()) {
-            
+
             TopRatedViewHolder holder = (TopRatedViewHolder) viewHolder;
             Picasso.with(context).load(Constants.BACKDROP_IMAGE_URL + info.getMovieBackdrop())
                     .placeholder(R.drawable.placeholder)

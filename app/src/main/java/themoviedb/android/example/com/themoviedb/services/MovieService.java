@@ -6,6 +6,7 @@ import retrofit2.http.Path;
 import themoviedb.android.example.com.themoviedb.model.CastList;
 import themoviedb.android.example.com.themoviedb.model.MovieDetails;
 import themoviedb.android.example.com.themoviedb.model.MovieList;
+import themoviedb.android.example.com.themoviedb.model.VideoList;
 
 public interface MovieService {
 
@@ -17,4 +18,7 @@ public interface MovieService {
 
     @GET("{id}/credits?api_key=5d967c7c335764f39b1efbe9c5de9760")
     Call<CastList> getMovieCastList(@Path("id") Long id);
+
+    @GET("{id}/videos?api_key=5d967c7c335764f39b1efbe9c5de9760")
+    Call<VideoList> getVideoList(@Path("id") Long id);
 }

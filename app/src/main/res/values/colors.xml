@@ -6,4 +6,5 @@
     <color name="text_color">#FFFFFF</color>
     <color name="background_color">#424242</color>
     <color name="toolbar_background_color">#212121</color>
+    <color name="background_translucent">#80444444</color>
 </resources>

@@ -29,6 +29,8 @@ import themoviedb.android.example.com.themoviedb.model.CastDetails;
 import themoviedb.android.example.com.themoviedb.model.CastList;
 import themoviedb.android.example.com.themoviedb.model.Genre;
 import themoviedb.android.example.com.themoviedb.model.MovieDetails;
+import themoviedb.android.example.com.themoviedb.model.VideoDetails;
+import themoviedb.android.example.com.themoviedb.model.VideoList;
 import themoviedb.android.example.com.themoviedb.services.MovieService;
 import themoviedb.android.example.com.themoviedb.util.Constants;
 
@@ -40,6 +42,7 @@ public class DetailFragment extends Fragment {
     private TextView genreView;
     private RatingBar ratingBarView;
     private ImageView imageView;
+    private ImageView videoPlayView;
     private RecyclerView castListView;
     private CastListAdapter adapter;
     private List<CastDetails> castList = new ArrayList<>();
@@ -83,6 +86,7 @@ public class DetailFragment extends Fragment {
         ratingBarView = getActivity().findViewById(R.id.detailsRating);
         imageView = getActivity().findViewById(R.id.detailsImage);
         castListView = getActivity().findViewById(R.id.detailsCastList);
+        videoPlayView = getActivity().findViewById(R.id.detailsPlayVideo);
 
         castListView.setNestedScrollingEnabled(false);
         adapter = new CastListAdapter(getActivity(), castList);
@@ -134,15 +138,23 @@ public class DetailFragment extends Fragment {
                             .placeholder(R.drawable.placeholder)
                             .into(imageView);
 
+                    geVideoList();
                     getCastList();
                 }
             }
 
             @Override
             public void onFailure(Call<MovieDetails> call, Throwable t) {
-
+                Toast.makeText(getActivity(), R.string.fetch_failed, Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private void geVideoList() {
+        Long id = getArguments().getLong(Constants.ID, 0L);
+        Call<VideoList> call = service.getVideoList(id);
+        getVideosDetail(call);
+
     }
 
     private void getCastList() {
@@ -167,6 +179,30 @@ public class DetailFragment extends Fragment {
             @Override
             public void onFailure(Call<CastList> call, Throwable t) {
                 Toast.makeText(getActivity(), getResources().getString(R.string.cast_fetch_failed), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void getVideosDetail(Call<VideoList> call) {
+
+        call.enqueue(new Callback<VideoList>() {
+            @Override
+            public void onResponse(Call<VideoList> call, Response<VideoList> response) {
+                if(response != null && response.isSuccessful()) {
+                    VideoList info = response.body();
+                    List<VideoDetails> list = info.getResults();
+                    if(list != null && list.size() > 0) {
+                        videoPlayView.setVisibility(View.VISIBLE);
+                        videoPlayView.setAlpha(0.2f);
+                    } else {
+                        videoPlayView.setVisibility(View.GONE);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<VideoList> call, Throwable t) {
+
             }
         });
     }
