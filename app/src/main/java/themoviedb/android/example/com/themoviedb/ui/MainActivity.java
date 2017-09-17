@@ -88,5 +88,6 @@ public class MainActivity extends AppCompatActivity {
     public interface FragmentListener {
 
         void getMovieList(Call<MovieList> call);
+        void onItemClicked(int position);
     }
 }

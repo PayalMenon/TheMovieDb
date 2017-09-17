@@ -23,6 +23,17 @@ public class MovieInfo {
     @Expose
     public String movieBackdrop;
 
+    @SerializedName("vote_average")
+    @Expose
+    Double rating;
+
+    @Expose
+    Long id;
+
+    @SerializedName("video")
+    @Expose
+    boolean isVideo;
+
     public String getMovieOverview() {
         return movieOverview;
     }
@@ -37,5 +48,17 @@ public class MovieInfo {
 
     public String getMovieBackdrop() {
         return movieBackdrop;
+    }
+
+    public Double getRating() {
+        return rating;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public boolean isVideo() {
+        return isVideo;
     }
 }

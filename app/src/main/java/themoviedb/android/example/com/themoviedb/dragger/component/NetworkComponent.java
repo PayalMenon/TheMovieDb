@@ -5,6 +5,7 @@ import javax.inject.Singleton;
 import dagger.Component;
 import themoviedb.android.example.com.themoviedb.dragger.module.ApplicationModule;
 import themoviedb.android.example.com.themoviedb.dragger.module.NetworkModule;
+import themoviedb.android.example.com.themoviedb.ui.DetailFragment;
 import themoviedb.android.example.com.themoviedb.ui.ListFragment;
 import themoviedb.android.example.com.themoviedb.ui.MainActivity;
 
@@ -14,4 +15,5 @@ public interface NetworkComponent {
 
     void inject(ListFragment fragment);
     void inject(MainActivity activity);
+    void inject(DetailFragment detailFragment);
 }

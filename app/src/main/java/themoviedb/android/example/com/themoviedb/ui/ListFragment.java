@@ -23,6 +23,7 @@ import themoviedb.android.example.com.themoviedb.adapter.MovieListAdapter;
 import themoviedb.android.example.com.themoviedb.model.MovieInfo;
 import themoviedb.android.example.com.themoviedb.model.MovieList;
 import themoviedb.android.example.com.themoviedb.services.MovieService;
+import themoviedb.android.example.com.themoviedb.util.Constants;
 
 public class ListFragment extends Fragment implements MainActivity.FragmentListener {
 
@@ -55,7 +56,7 @@ public class ListFragment extends Fragment implements MainActivity.FragmentListe
 
         listView = getActivity().findViewById(R.id.list_view);
 
-        adapter = new MovieListAdapter(getActivity(), movieList);
+        adapter = new MovieListAdapter(getActivity(), movieList, this);
         listView.setAdapter(adapter);
 
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
@@ -82,5 +83,17 @@ public class ListFragment extends Fragment implements MainActivity.FragmentListe
                 Toast.makeText(getActivity(), R.string.fetch_failed, Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    @Override
+    public void onItemClicked(int position) {
+
+        MovieInfo info = movieList.get(position);
+
+        Fragment detailsFragment = DetailFragment.newInstance(info.getId());
+        getFragmentManager().beginTransaction()
+                .addToBackStack(Constants.LIST_FRAGMENT)
+                .replace(R.id.fragment_container, detailsFragment, Constants.DETAIL_FRAGMENT)
+                .commit();
     }
 }

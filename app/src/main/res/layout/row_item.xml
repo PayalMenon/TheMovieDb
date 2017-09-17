@@ -4,7 +4,7 @@
     android:id="@+id/item_cardView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
+    android:layout_margin="@dimen/marginLeft"
     card_view:cardCornerRadius="3dp"
     card_view:cardElevation="4dp">
 
@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/marginLeft"
-            android:scaleType="fitXY" />
+            android:scaleType="center" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
