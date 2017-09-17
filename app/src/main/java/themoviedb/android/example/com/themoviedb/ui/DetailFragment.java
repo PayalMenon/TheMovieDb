@@ -92,6 +92,8 @@ public class DetailFragment extends Fragment {
                 LinearLayoutManager.HORIZONTAL, false);
         castListView.setLayoutManager(manager);
 
+        ((MainActivity) getActivity()).getSupportActionBar().hide();
+
         getMovie();
     }
 
@@ -106,20 +108,20 @@ public class DetailFragment extends Fragment {
         call.enqueue(new Callback<MovieDetails>() {
             @Override
             public void onResponse(Call<MovieDetails> call, Response<MovieDetails> response) {
-                if(response.isSuccessful()) {
+                if (response.isSuccessful()) {
                     MovieDetails details = response.body();
                     int duration = details.getDuration();
                     String length = duration + "m";
                     if (duration > 60) {
-                        length = duration/60 + "h" + duration%60 + "m";
+                        length = duration / 60 + "h" + duration % 60 + "m";
                     }
                     titleView.setText(details.getTitle() + " ( " + length + " ) ");
                     releaseDateView.setText(getResources().getString((R.string.released_on), details.getReleased()));
                     overviewView.setText(details.getOverview());
-                    ratingBarView.setRating((details.getRating().floatValue()/2));
+                    ratingBarView.setRating((details.getRating().floatValue() / 2));
 
                     List<Genre> genre = details.getGenres();
-                    if(genre != null && genre.size() > 0) {
+                    if (genre != null && genre.size() > 0) {
                         StringBuilder genreList = new StringBuilder();
                         for (Genre genre1 : genre) {
                             genreList.append(genre1.getName() + ",");
@@ -154,7 +156,7 @@ public class DetailFragment extends Fragment {
         call.enqueue(new Callback<CastList>() {
             @Override
             public void onResponse(Call<CastList> call, Response<CastList> response) {
-                if(response.isSuccessful()) {
+                if (response.isSuccessful()) {
                     CastList cast = response.body();
                     castList = cast.getCast();
                     adapter.updateDateSet(castList);

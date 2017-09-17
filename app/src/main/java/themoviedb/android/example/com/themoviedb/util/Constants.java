@@ -8,6 +8,9 @@ public class Constants {
     public static final String PROFILE_IMAGE_URL = "https://image.tmdb.org/t/p/w154";
     public static final String BACKDROP_IMAGE_URL = "https://image.tmdb.org/t/p/w1280";
     public static final String NOW_PLAYING = "now_playing";
+    public static final String POPULAR = "popular";
+    public static final String TOP_RATED = "top_rated";
+    public static final String UPCOMING = "upcoming";
     public static final String ID = "id";
 
     public static final int HIGH_RATED = 1;

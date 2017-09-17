@@ -62,6 +62,7 @@ public class ListFragment extends Fragment implements MainActivity.FragmentListe
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         listView.setLayoutManager(manager);
 
+        ((MainActivity) getActivity()).getSupportActionBar().show();
         ((MainActivity) getActivity()).setFragmentListener(this);
     }
 
