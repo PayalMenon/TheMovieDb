@@ -12,6 +12,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import themoviedb.android.example.com.themoviedb.R;
 import themoviedb.android.example.com.themoviedb.model.CastDetails;
 import themoviedb.android.example.com.themoviedb.util.Constants;
@@ -47,14 +49,15 @@ public class CastListAdapter extends RecyclerView.Adapter<CastListAdapter.CastLi
 
     public class CastListHolder extends RecyclerView.ViewHolder {
 
+        @BindView(R.id.castName)
         TextView castName;
+        @BindView(R.id.castImage)
         ImageView castImage;
 
         public CastListHolder(View itemView) {
             super(itemView);
 
-            castName = itemView.findViewById(R.id.castName);
-            castImage = itemView.findViewById(R.id.castImage);
+            ButterKnife.bind(this, itemView);
         }
     }
 

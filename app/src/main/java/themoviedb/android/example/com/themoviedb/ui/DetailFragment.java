@@ -19,6 +19,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,14 +38,22 @@ import themoviedb.android.example.com.themoviedb.util.Constants;
 
 public class DetailFragment extends Fragment {
 
-    private TextView titleView;
-    private TextView releaseDateView;
-    private TextView overviewView;
-    private TextView genreView;
-    private RatingBar ratingBarView;
-    private ImageView imageView;
-    private ImageView videoPlayView;
-    private RecyclerView castListView;
+    @BindView(R.id.detailsTitle)
+    TextView titleView;
+    @BindView(R.id.detailsReleaseDate)
+    TextView releaseDateView;
+    @BindView(R.id.detailsOverview)
+    TextView overviewView;
+    @BindView(R.id.detailsGenre)
+    TextView genreView;
+    @BindView(R.id.detailsRating)
+    RatingBar ratingBarView;
+    @BindView(R.id.detailsImage)
+    ImageView imageView;
+    @BindView(R.id.detailsPlayVideo)
+    ImageView videoPlayView;
+    @BindView(R.id.detailsCastList)
+    RecyclerView castListView;
     private CastListAdapter adapter;
     private List<CastDetails> castList = new ArrayList<>();
 
@@ -69,7 +79,9 @@ public class DetailFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.detail_view, container, false);
+        View view = inflater.inflate(R.layout.detail_view, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
@@ -78,15 +90,6 @@ public class DetailFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         ((Application) getActivity().getApplication()).getNetworkComponent().inject(this);
-
-        titleView = getActivity().findViewById(R.id.detailsTitle);
-        releaseDateView = getActivity().findViewById(R.id.detailsReleaseDate);
-        overviewView = getActivity().findViewById(R.id.detailsOverview);
-        genreView = getActivity().findViewById(R.id.detailsGenre);
-        ratingBarView = getActivity().findViewById(R.id.detailsRating);
-        imageView = getActivity().findViewById(R.id.detailsImage);
-        castListView = getActivity().findViewById(R.id.detailsCastList);
-        videoPlayView = getActivity().findViewById(R.id.detailsPlayVideo);
 
         castListView.setNestedScrollingEnabled(false);
         adapter = new CastListAdapter(getActivity(), castList);
@@ -188,10 +191,10 @@ public class DetailFragment extends Fragment {
         call.enqueue(new Callback<VideoList>() {
             @Override
             public void onResponse(Call<VideoList> call, Response<VideoList> response) {
-                if(response != null && response.isSuccessful()) {
+                if (response != null && response.isSuccessful()) {
                     VideoList info = response.body();
                     List<VideoDetails> list = info.getResults();
-                    if(list != null && list.size() > 0) {
+                    if (list != null && list.size() > 0) {
                         videoPlayView.setVisibility(View.VISIBLE);
                         videoPlayView.setAlpha(0.2f);
                     } else {

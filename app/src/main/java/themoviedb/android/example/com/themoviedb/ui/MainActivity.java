@@ -17,6 +17,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import themoviedb.android.example.com.themoviedb.Application;
 import themoviedb.android.example.com.themoviedb.R;
@@ -33,12 +35,15 @@ public class MainActivity extends AppCompatActivity {
 
     private FragmentListener fragmentListener;
     private String movieType;
-    private Toolbar actionBar;
+    @BindView(R.id.toolbar)
+    Toolbar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ButterKnife.bind(this);
 
         ((Application) getApplication()).getNetworkComponent().inject(this);
 
@@ -46,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
             movieType = Constants.NOW_PLAYING;
         }
 
-        actionBar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(actionBar);
 
         addListFragment();

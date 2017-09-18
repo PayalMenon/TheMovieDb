@@ -14,6 +14,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import themoviedb.android.example.com.themoviedb.R;
 import themoviedb.android.example.com.themoviedb.model.MovieInfo;
 import themoviedb.android.example.com.themoviedb.ui.MainActivity;
@@ -98,31 +100,33 @@ public class MovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     public class ListViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView titleView;
-        private TextView overviewView;
-        private ImageView posterView;
-        private CardView cardView;
+        @BindView(R.id.itemTitle)
+        TextView titleView;
+        @BindView(R.id.itemOverview)
+        TextView overviewView;
+        @BindView(R.id.itemImage)
+        ImageView posterView;
+        @BindView(R.id.item_cardView)
+        CardView cardView;
 
         public ListViewHolder(View itemView) {
             super(itemView);
 
-            titleView = itemView.findViewById(R.id.itemTitle);
-            overviewView = itemView.findViewById(R.id.itemOverview);
-            posterView = itemView.findViewById(R.id.itemImage);
-            cardView = itemView.findViewById(R.id.item_cardView);
+            ButterKnife.bind(this, itemView);
         }
     }
 
     public class TopRatedViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView bannerView;
-        private CardView cardView;
+        @BindView(R.id.itemImage)
+        ImageView bannerView;
+        @BindView(R.id.item_cardView)
+        CardView cardView;
 
         public TopRatedViewHolder(View itemView) {
             super(itemView);
 
-            bannerView = itemView.findViewById(R.id.itemImage);
-            cardView = itemView.findViewById(R.id.item_cardView);
+            ButterKnife.bind(this, itemView);
         }
     }
 

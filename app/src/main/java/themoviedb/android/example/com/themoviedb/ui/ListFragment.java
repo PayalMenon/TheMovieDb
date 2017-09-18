@@ -14,6 +14,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,7 +30,8 @@ import themoviedb.android.example.com.themoviedb.util.Constants;
 public class ListFragment extends Fragment implements MainActivity.FragmentListener {
 
     private List<MovieInfo> movieList = new ArrayList<>();
-    private RecyclerView listView;
+    @BindView(R.id.list_view)
+    RecyclerView listView;
     private MovieListAdapter adapter;
 
     @Inject
@@ -44,7 +47,10 @@ public class ListFragment extends Fragment implements MainActivity.FragmentListe
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.list_fragment, container, false);
+        View view = inflater.inflate(R.layout.list_fragment, container, false);
+        ButterKnife.bind(this, view);
+
+        return view;
     }
 
     @Override
@@ -53,8 +59,6 @@ public class ListFragment extends Fragment implements MainActivity.FragmentListe
         super.onActivityCreated(savedInstanceState);
 
         ((Application) getActivity().getApplication()).getNetworkComponent().inject(this);
-
-        listView = getActivity().findViewById(R.id.list_view);
 
         adapter = new MovieListAdapter(getActivity(), movieList, this);
         listView.setAdapter(adapter);
